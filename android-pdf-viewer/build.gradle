@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'  // Add this line
 
 android {
     compileSdkVersion rootProject.tools.compileSdk
@@ -14,14 +15,33 @@ android {
 
 dependencies {
     implementation 'androidx.core:core:1.7.0'
-    api 'com.github.Akul-Tyagi:PdfiumAndroid:v1.9.3-16kb'
+    api 'com.github.Akul-Tyagi:PdfiumAndroid:v1.9.6'
 }
 
-// Maven Publishing
-ext {
-    PUBLISH_GROUP_ID = 'com.github.Akul-Tyagi'
-    PUBLISH_VERSION = "${rootProject.tools.versionName}"
-    PUBLISH_ARTIFACT_ID = 'android-pdf-viewer'
+// For JitPack builds, use simple publishing
+if (project.hasProperty('signing.skip') && project.property('signing.skip').toBoolean()) {
+    afterEvaluate {
+        publishing {
+            publications {
+                release(MavenPublication) {
+                    from components.release
+                    groupId = 'com.github.Akul-Tyagi'
+                    artifactId = 'android-pdf-viewer'
+                    version = "${rootProject.tools.versionName}"
+                }
+            }
+        }
+    }
+} else {
+    // Maven Publishing for regular builds
+    ext {
+        PUBLISH_GROUP_ID = 'com.github.Akul-Tyagi'
+        PUBLISH_VERSION = "${rootProject.tools.versionName}"
+        PUBLISH_ARTIFACT_ID = 'android-pdf-viewer'
+    }
+    
+    // Only apply if file exists
+    if (file("${rootProject.projectDir}/android-pdf-viewer/publish-mavencentral.gradle").exists()) {
+        apply from: "${rootProject.projectDir}/android-pdf-viewer/publish-mavencentral.gradle"
+    }
 }
-
-apply from: "${rootProject.projectDir}/android-pdf-viewer/publish-mavencentral.gradle"
