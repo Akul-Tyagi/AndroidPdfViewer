@@ -19,7 +19,7 @@ dependencies {
 
 // Maven Publishing
 ext {
-    PUBLISH_GROUP_ID = 'com.github.mhiew'
+    PUBLISH_GROUP_ID = 'com.github.Akul-Tyagi'
     PUBLISH_VERSION = "${rootProject.tools.versionName}"
     PUBLISH_ARTIFACT_ID = 'android-pdf-viewer'
 }
