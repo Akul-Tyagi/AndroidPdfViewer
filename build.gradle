@@ -22,6 +22,15 @@ ext {
             minSdk      : 19,
             targetSdk   : 31,
             compileSdk  : 31,
-            versionName: '3.2.0-beta.4-16kb'
+            versionName: '3.2.5'
     ]
+}
+
+// Add this to disable signing tasks for JitPack builds
+if (project.hasProperty('signing.skip') && project.property('signing.skip').toBoolean()) {
+    allprojects {
+        tasks.withType(Sign) {
+            enabled = false
+        }
+    }
 }
