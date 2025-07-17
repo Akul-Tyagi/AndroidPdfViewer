@@ -1,0 +1,9 @@
+jdk:
+  - openjdk11
+
+before_install:
+  - echo "Setting up AndroidPdfViewer build"
+
+install:
+  - chmod +x gradlew
+  - ./gradlew clean -Pgroup=com.github.Akul-Tyagi -Pversion=$VERSION -Psigning.skip=true publishToMavenLocal
