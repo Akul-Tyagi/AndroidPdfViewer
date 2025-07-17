@@ -1,6 +1,12 @@
 
-#### This is a fork of the [AndroidPdfViewer](https://github.com/barteksc/AndroidPdfViewer)
-switch back to the mainline repo when it gets migrated off JCenter
+# Android PdfViewer with 16KB Page Size Support
+
+This is a fork of [AndroidPdfViewer](https://github.com/barteksc/AndroidPdfViewer) with support for 16KB page size, required by newer Android versions. The fork uses a custom version of PdfiumAndroid that has been modified to support 16KB memory pages.
+
+## What's new in this fork?
+* Added support for 16KB page size required by newer Android versions and devices
+* Compatible with Play Store app bundle requirements
+* Based on version 3.2.0-beta.3 of AndroidPdfViewer
 
 
 # Android PdfViewer
@@ -58,7 +64,7 @@ allprojects {
 }
 ```
 
-`implementation 'com.github.mhiew:android-pdf-viewer:3.2.0-beta.3'`
+`implementation 'com.github.Akul-Tyagi:AndroidPdfViewer:v3.2.0-beta.4-16kb'`
 
 ## ProGuard
 If you are using ProGuard, add following rule to proguard config file:
