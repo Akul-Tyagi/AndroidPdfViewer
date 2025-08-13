@@ -11,7 +11,8 @@ android {
         minSdk 21
         targetSdk 35
         versionCode 1
-        versionName "3.3.1-16kb"
+        // Align versionName with root project version
+        versionName project.version.toString()
         consumerProguardFiles "consumer-rules.pro"
     }
 
@@ -38,32 +39,35 @@ dependencies {
     api 'com.github.Akul-Tyagi:PdfiumAndroid:v1.10.0-16kb'
 }
 
-publishing {
-    publications {
-        create("release", MavenPublication) {
-            from components.release
-            groupId = "com.github.Akul-Tyagi"
-            artifactId = "android-pdf-viewer"
-            version = "3.3.0-16kb"
-            pom {
-                name = "AndroidPdfViewer"
-                description = "Modernized PDF viewer (16KB page size support) using PdfiumAndroid fork"
-                url = "https://github.com/Akul-Tyagi/AndroidPdfViewer"
-                licenses {
-                    license {
-                        name = "Apache License 2.0"
-                        url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
-                    }
-                }
-                scm {
+// Delay publication configuration until components are created
+afterEvaluate {
+    publishing {
+        publications {
+            create("release", MavenPublication) {
+                from(components["release"])
+                groupId = project.group
+                artifactId = "android-pdf-viewer"
+                version = project.version.toString()
+                pom {
+                    name = "AndroidPdfViewer"
+                    description = "Modernized PDF viewer (16KB page size support) using PdfiumAndroid fork"
                     url = "https://github.com/Akul-Tyagi/AndroidPdfViewer"
-                    connection = "scm:git:https://github.com/Akul-Tyagi/AndroidPdfViewer.git"
-                    developerConnection = "scm:git:ssh:git@github.com:Akul-Tyagi/AndroidPdfViewer.git"
-                }
-                developers {
-                    developer {
-                        id = "akul"
-                        name = "Akul Tyagi"
+                    licenses {
+                        license {
+                            name = "Apache License 2.0"
+                            url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                        }
+                    }
+                    scm {
+                        url = "https://github.com/Akul-Tyagi/AndroidPdfViewer"
+                        connection = "scm:git:https://github.com/Akul-Tyagi/AndroidPdfViewer.git"
+                        developerConnection = "scm:git:ssh:git@github.com:Akul-Tyagi/AndroidPdfViewer.git"
+                    }
+                    developers {
+                        developer {
+                            id = "akul"
+                            name = "Akul Tyagi"
+                        }
                     }
                 }
             }
