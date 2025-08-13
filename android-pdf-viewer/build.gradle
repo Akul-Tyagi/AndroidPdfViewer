@@ -15,7 +15,7 @@ android {
 
 dependencies {
     implementation 'androidx.core:core:1.7.0'
-    api 'com.github.Akul-Tyagi:PdfiumAndroid:v1.9.6'
+    api 'com.github.Akul-Tyagi:PdfiumAndroid:v1.10.0-16kb'
 }
 
 // For JitPack builds, use simple publishing
