@@ -1,28 +1,22 @@
 plugins {
-    id 'com.android.application' version rootProject.versions.agp
+    id 'com.android.application'
 }
 
 android {
     namespace "com.github.barteksc.pdfviewer.sample"
-    compileSdk rootProject.versions.compileSdk
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.github.barteksc.pdfviewer.sample"
-        minSdk rootProject.versions.minSdk
-        targetSdk rootProject.versions.targetSdk
+        minSdk 19
+        targetSdk 35
         versionCode 3
-        versionName rootProject.versions.viewerVer
+        versionName "3.3.1-16kb"
 
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments += ["androidManifestFile": "$projectDir/src/main/AndroidManifest.xml".toString()]
             }
-        }
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
         }
     }
 
@@ -35,6 +29,6 @@ android {
 dependencies {
     implementation project(':android-pdf-viewer')
     implementation 'androidx.appcompat:appcompat:1.7.0'
-    implementation 'org.androidannotations:androidannotations-api:4.8.0' // bumped
+    implementation 'org.androidannotations:androidannotations-api:4.8.0'
     annotationProcessor 'org.androidannotations:androidannotations:4.8.0'
 }
