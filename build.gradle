@@ -6,7 +6,7 @@ ext {
             minSdk     : 19,
             targetSdk  : 35,
             compileSdk : 35,
-            viewerVer  : "3.3.1-16kb"   // updated to match module
+            viewerVer  : "3.3.2-16kb"   // updated to match module
     ]
 }
 
