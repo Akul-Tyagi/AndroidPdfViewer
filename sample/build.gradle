@@ -1,37 +1,40 @@
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
+plugins {
+    id 'com.android.application' version rootProject.versions.agp
 }
-
-repositories {
-    google()
-    mavenCentral()
-}
-
-apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion rootProject.tools.compileSdk
+    namespace "com.github.barteksc.pdfviewer.sample"
+    compileSdk rootProject.versions.compileSdk
 
     defaultConfig {
-        minSdkVersion rootProject.tools.minSdk
-        targetSdkVersion rootProject.tools.targetSdk
+        applicationId "com.github.barteksc.pdfviewer.sample"
+        minSdk rootProject.versions.minSdk
+        targetSdk rootProject.versions.targetSdk
         versionCode 3
-        versionName "${rootProject.tools.versionName}"
+        versionName rootProject.versions.viewerVer
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = ["androidManifestFile": "$projectDir/src/main/AndroidManifest.xml".toString()]
+                arguments += ["androidManifestFile": "$projectDir/src/main/AndroidManifest.xml".toString()]
             }
         }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 }
 
 dependencies {
     implementation project(':android-pdf-viewer')
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'org.androidannotations:androidannotations-api:4.6.0'
-    annotationProcessor "org.androidannotations:androidannotations:4.6.0"
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'org.androidannotations:androidannotations-api:4.8.0' // bumped
+    annotationProcessor 'org.androidannotations:androidannotations:4.8.0'
 }
