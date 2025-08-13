@@ -22,7 +22,7 @@ ext {
             minSdk      : 19,
             targetSdk   : 31,
             compileSdk  : 31,
-            versionName: '3.2.5'
+            versionName: '3.2.5-16kb'
     ]
 }
 
