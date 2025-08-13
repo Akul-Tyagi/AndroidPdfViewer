@@ -1,15 +1,4 @@
-import org.gradle.api.tasks.testing.logging.TestLogEvent
-
-buildscript {
-    // (Legacy buildscript block kept empty; not needed with plugin DSL.)
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        // No AGP classpath here; using plugins {} inside module
-    }
-}
+// Root build script (no repositories or android blocks here)
 
 ext {
     versions = [
@@ -17,21 +6,14 @@ ext {
             minSdk     : 19,
             targetSdk  : 35,
             compileSdk : 35,
-            viewerVer  : "3.2.8-16kb"  // UPDATE VERSION HERE
+            viewerVer  : "3.3.0-16kb"   // bump for this modernization release
     ]
 }
 
-allprojects {
-    group = "com.github.Akul-Tyagi"
-    version = versions.viewerVer
-    repositories {
-        google()
-        mavenCentral()
-        maven { url 'https://jitpack.io' }
-    }
-}
+group = "com.github.Akul-Tyagi"
+version = versions.viewerVer
 
-// Disable signing when -Psigning.skip=true (for JitPack convenience)
+// Disable signing when building on JitPack
 if (project.hasProperty("signing.skip") && project.property("signing.skip").toString().toBoolean()) {
     allprojects {
         tasks.matching { it.name.startsWith("sign") }.configureEach { enabled = false }
