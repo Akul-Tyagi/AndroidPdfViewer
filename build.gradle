@@ -6,14 +6,13 @@ ext {
             minSdk     : 19,
             targetSdk  : 35,
             compileSdk : 35,
-            viewerVer  : "3.3.0-16kb"   // bump for this modernization release
+            viewerVer  : "3.3.1-16kb"   // updated to match module
     ]
 }
 
 group = "com.github.Akul-Tyagi"
 version = versions.viewerVer
 
-// Disable signing when building on JitPack
 if (project.hasProperty("signing.skip") && project.property("signing.skip").toString().toBoolean()) {
     allprojects {
         tasks.matching { it.name.startsWith("sign") }.configureEach { enabled = false }
