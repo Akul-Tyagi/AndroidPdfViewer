@@ -2,8 +2,7 @@ jdk:
   - openjdk17
 
 before_install:
-  - echo "Setting up AndroidPdfViewer build"
+  - echo "Building AndroidPdfViewer with AGP 8.12.0 / Gradle 8.14.2"
 
 install:
-  - chmod +x gradlew
-  - ./gradlew clean -Pgroup=com.github.Akul-Tyagi -Pversion=$VERSION -Psigning.skip=true publishToMavenLocal
+  - ./gradlew :android-pdf-viewer:publishToMavenLocal -Psigning.skip=true -x test
