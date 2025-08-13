@@ -5,7 +5,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.0'
+        classpath 'com.android.tools.build:gradle:8.14.2'
     }
 }
 
@@ -19,12 +19,19 @@ allprojects {
 
 ext {
     tools = [
-            minSdk      : 19,
+            minSdk      : 21,
             targetSdk   : 31,
-            compileSdk  : 31,
+            compileSdk  : 35,
             versionName: '3.2.5-16kb'
     ]
 }
+compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
+    }
 
 // Add this to disable signing tasks for JitPack builds
 if (project.hasProperty('signing.skip') && project.property('signing.skip').toBoolean()) {
