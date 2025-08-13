@@ -1,14 +1,29 @@
+import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 buildscript {
+    // (Legacy buildscript block kept empty; not needed with plugin DSL.)
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
+        // No AGP classpath here; using plugins {} inside module
     }
 }
 
+ext {
+    versions = [
+            agp        : "8.12.0",
+            minSdk     : 19,
+            targetSdk  : 35,
+            compileSdk : 35,
+            viewerVer  : "3.2.8-16kb"  // UPDATE VERSION HERE
+    ]
+}
+
 allprojects {
+    group = "com.github.Akul-Tyagi"
+    version = versions.viewerVer
     repositories {
         google()
         mavenCentral()
@@ -16,27 +31,9 @@ allprojects {
     }
 }
 
-ext {
-    tools = [
-            minSdk      : 21,
-            targetSdk   : 31,
-            compileSdk  : 35,
-            versionName: '3.2.7-16kb'
-    ]
-}
-compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-
-// Add this to disable signing tasks for JitPack builds
-if (project.hasProperty('signing.skip') && project.property('signing.skip').toBoolean()) {
+// Disable signing when -Psigning.skip=true (for JitPack convenience)
+if (project.hasProperty("signing.skip") && project.property("signing.skip").toString().toBoolean()) {
     allprojects {
-        tasks.withType(Sign) {
-            enabled = false
-        }
+        tasks.matching { it.name.startsWith("sign") }.configureEach { enabled = false }
     }
 }
