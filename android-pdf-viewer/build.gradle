@@ -11,8 +11,7 @@ android {
         minSdk rootProject.versions.minSdk
         targetSdk rootProject.versions.targetSdk
         versionName = rootProject.versions.viewerVer
-        // versionCode is not published for libraries normally; keep 1.
-        versionCode 1
+        versionCode = 1
         consumerProguardFiles "consumer-rules.pro"
     }
 
@@ -20,9 +19,7 @@ android {
         release {
             minifyEnabled false
         }
-        debug {
-            // Leave default
-        }
+        debug { }
     }
 
     compileOptions {
@@ -30,9 +27,6 @@ android {
         targetCompatibility JavaVersion.VERSION_17
     }
 
-    // If you add Kotlin later, add kotlinOptions { jvmTarget = "17" }
-
-    // New publishing DSL (AGP 7.1+)
     publishing {
         singleVariant("release") {
             withSourcesJar()
@@ -41,11 +35,11 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.core:core:1.10.1'  // bump from 1.7.0
-    api 'com.github.Akul-Tyagi:PdfiumAndroid:v1.10.0-16kb' // Or v1.10.1-16kb if you re-publish j11
+    implementation 'androidx.core:core:1.12.0'
+    // Use the Java 17 build of PdfiumAndroid (adjust if you republish)
+    api 'com.github.Akul-Tyagi:PdfiumAndroid:v1.10.0-16kb'
 }
 
-// Standard Maven Publish (works with JitPack; it picks up the AAR)
 publishing {
     publications {
         create("release", MavenPublication) {
@@ -55,86 +49,7 @@ publishing {
             version = rootProject.versions.viewerVer
             pom {
                 name = "AndroidPdfViewer"
-                description = "Android PDF viewer (modernized, 16KB page size ready) using PdfiumAndroid fork"
-                url = "https://github.com/Akul-Tyagi/AndroidPdfViewer"
-                licenses {
-                    license {
-                        name = "Apache License 2.0"
-                        url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
-                    }
-                }
-                scm {
-                    url = "https://github.com/Akul-Tyagi/AndroidPdfViewer"
-                    connection = "scm:git:https://github.com/Akul-Tyagi/AndroidPdfViewer.git"
-                    developerConnection = "scm:git:ssh:git@github.com:Akul-Tyagi/AndroidPdfViewer.git"
-                }
-                developers {
-                    developer {
-                        id = "akul"
-                        name = "Akul Tyagi"
-                    }
-                }
-            }
-        }
-    }
-}plugins {
-    id 'com.android.library' version rootProject.versions.agp
-    id 'maven-publish'
-}
-
-android {
-    namespace "com.github.barteksc.pdfviewer"
-    compileSdk rootProject.versions.compileSdk
-
-    defaultConfig {
-        minSdk rootProject.versions.minSdk
-        targetSdk rootProject.versions.targetSdk
-        versionName = rootProject.versions.viewerVer
-        // versionCode is not published for libraries normally; keep 1.
-        versionCode 1
-        consumerProguardFiles "consumer-rules.pro"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-        }
-        debug {
-            // Leave default
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
-    }
-
-    // If you add Kotlin later, add kotlinOptions { jvmTarget = "17" }
-
-    // New publishing DSL (AGP 7.1+)
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-        }
-    }
-}
-
-dependencies {
-    implementation 'androidx.core:core:1.10.1'  // bump from 1.7.0
-    api 'com.github.Akul-Tyagi:PdfiumAndroid:v1.10.0-16kb' // Or v1.10.1-16kb if you re-publish j11
-}
-
-// Standard Maven Publish (works with JitPack; it picks up the AAR)
-publishing {
-    publications {
-        create("release", MavenPublication) {
-            from components.release
-            groupId = project.group
-            artifactId = "android-pdf-viewer"
-            version = rootProject.versions.viewerVer
-            pom {
-                name = "AndroidPdfViewer"
-                description = "Android PDF viewer (modernized, 16KB page size ready) using PdfiumAndroid fork"
+                description = "Modernized PDF viewer (16KB page size support) using PdfiumAndroid fork"
                 url = "https://github.com/Akul-Tyagi/AndroidPdfViewer"
                 licenses {
                     license {
