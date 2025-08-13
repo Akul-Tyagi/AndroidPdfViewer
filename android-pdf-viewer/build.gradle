@@ -1,17 +1,17 @@
 plugins {
-    id 'com.android.library' version rootProject.versions.agp
+    id 'com.android.library'
     id 'maven-publish'
 }
 
 android {
     namespace "com.github.barteksc.pdfviewer"
-    compileSdk rootProject.versions.compileSdk
+    compileSdk 35
 
     defaultConfig {
-        minSdk rootProject.versions.minSdk
-        targetSdk rootProject.versions.targetSdk
-        versionName = rootProject.versions.viewerVer
-        versionCode = 1
+        minSdk 21
+        targetSdk 35
+        versionCode 1
+        versionName "3.3.1-16kb"
         consumerProguardFiles "consumer-rules.pro"
     }
 
@@ -19,7 +19,6 @@ android {
         release {
             minifyEnabled false
         }
-        debug { }
     }
 
     compileOptions {
@@ -36,7 +35,6 @@ android {
 
 dependencies {
     implementation 'androidx.core:core:1.12.0'
-    // Use the Java 17 build of PdfiumAndroid (adjust if you republish)
     api 'com.github.Akul-Tyagi:PdfiumAndroid:v1.10.0-16kb'
 }
 
@@ -44,9 +42,9 @@ publishing {
     publications {
         create("release", MavenPublication) {
             from components.release
-            groupId = project.group
+            groupId = "com.github.Akul-Tyagi"
             artifactId = "android-pdf-viewer"
-            version = rootProject.versions.viewerVer
+            version = "3.3.0-16kb"
             pom {
                 name = "AndroidPdfViewer"
                 description = "Modernized PDF viewer (16KB page size support) using PdfiumAndroid fork"
