@@ -11,7 +11,7 @@ android {
         minSdk 19
         targetSdk 35
         versionCode 3
-        versionName "3.4.0-16kb"
+        versionName "3.4.1-16kb"
 
         javaCompileOptions {
             annotationProcessorOptions {
